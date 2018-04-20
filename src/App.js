@@ -1,147 +1,218 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './App.css';
+import _ from 'underscore';
 
 class App extends Component {
 
     constructor(props) {
         super(props);
+        let tasks = [
+            {
+                id: 1,
+                description: 'Add new table',
+                status: 'New',
+                readOnly: true
+            },
+            {
+                id: 2,
+                description: 'Edit table',
+                status: 'In progress',
+                readOnly: true
+            },
+            {
+                id: 3,
+                description: 'Delete from table',
+                status: 'Feedback',
+                readOnly: true
+            }
+        ];
 
+        let inputs =
+            {
+                id: '',
+                description: '',
+                status: '',
+                readOnly: true
+            };
         this.state = {
-            head_names: ['id', 'description', 'status', 'actions'],
-            rows: [
-                [1, "blabla", <Status />, <button onClick={(e)=> this.fDelete(e)} className="DelBtn">Delete</button>, <button onClick={(e)=> this.fSubmit(e)} className="EditBtn">Edit</button>],
-                [2, "blabla", <Status />, <button onClick={(e)=> this.fDelete(e)} className="DelBtn">Delete</button>, <button onClick={(e)=> this.fSubmit(e)} className="EditBtn">Edit</button>],
-                [3, "blabla", <Status />, <button onClick={(e)=> this.fDelete(e)} className="DelBtn">Delete</button>, <button onClick={(e)=> this.fSubmit(e)} className="EditBtn">Edit</button>],
-                [4, "blabla", <Status />, <button onClick={(e)=> this.fDelete(e)} className="DelBtn">Delete</button>, <button onClick={(e)=> this.fSubmit(e)} className="EditBtn">Edit</button>],
-            ]
+            tasks: tasks,
+            inputs: inputs
         }
     }
 
-    AddRow() {
-        let newRows = this.state.rows;
-        newRows.push();
-        this.setState({rows: newRows});
-    }
-
-    fSubmit = (e) => {
-        e.preventDefault();
-
-        let datas = this.state.datas;
-        let description = this.state.description;
-        let status = this.state.status;
-
-        let data = {
-            description, status
-        }
-
-        datas.push(data);
-
-        this.setState({
-            datas: datas
+    onEditHandler(task) {
+        console.log(task)
+        let tasks = this.state.tasks;
+        tasks = _.map(tasks, function (t) {
+            if (t.id === task.id) {
+                t.readOnly = false;
+            }
+            return t;
         });
-
-        this.refs.myForm.reset();
+        this.setState({tasks: tasks})
     }
 
-    fDelete = (i) => {
-        let datas = this.state.datas;
-        datas.splice(i,1);
-
-        this.setState({
-            datas: datas
+    onSaveHandler(task) {
+        console.log(task)
+        let tasks = this.state.tasks;
+        tasks = _.map(tasks, function (t) {
+            if (t.id === task.id) {
+                t.readOnly = true;
+            }
+            return t;
         });
-
-        this.refs.myForm.reset();
+        this.setState({tasks: tasks})
     }
 
-  render() {
-    return (
-      <div className="App">
-          <form ref="myForm" className="Inputs">
-              <input name="id"  />
-              <input type="text" name="description" placeholder="description"/>
-              <input type="text" name="status" placeholder="status"/>
-          </form>
-          <button onClick={(e)=> this.fSubmit(e)} className="AddBtn">ADD</button>
-          <h1 className="App-title">Task tracker</h1>
-          <Table head={this.state.head_names} rows={this.state.rows} />
-      </div>
-    );
-  }
-}
+    onDeleteHandler(task) {
+        console.log(task)
+        let tasks = this.state.tasks;
+        tasks = _.filter(tasks, function (t) {
+            return t.id !== task.id;
+        });
+        this.setState({tasks: tasks})
+    }
 
-class Table extends Component {
+    onDescriptionChange(e, task) {
+        console.log(e)
+        let tasks = this.state.tasks;
+        tasks = _.map(tasks, function (t) {
+            if (t.id === task.id) {
+                t.description = e.target.value;
+            }
+            return t;
+        });
+        this.setState({tasks: tasks})
+    }
+
+    onStatusChange(e, task) {
+        console.log(e)
+        let tasks = this.state.tasks;
+        tasks = _.map(tasks, function (t) {
+            if (t.id === task.id) {
+                t.status = e.target.value;
+            }
+            return t;
+        });
+        this.setState({tasks: tasks})
+    }
+
+    onAddHandler() {
+        let input = this.state.inputs;
+        input.readOnly = false;
+        this.setState({inputs: input})
+    }
+
+    onSaveInputHandler() {
+        let input = this.state.inputs;
+        let tasks = this.state.tasks;
+        input.readOnly = true;
+        input.id = tasks[tasks.length - 1].id + 1;
+        tasks.push(input);
+        this.setState({
+            inputs: {
+                id: '',
+                description: '',
+                status: '',
+                readOnly: true
+            }, tasks: tasks
+        })
+    }
+
+    onDescriptionAdd(e) {
+        console.log(e)
+        let input = this.state.inputs;
+        input.description = e.target.value;
+        this.setState({inputs: input})
+    }
+
+    onStatusAdd(e) {
+        console.log(e)
+        let input = this.state.inputs;
+        input.status = e.target.value;
+        this.setState({inputs: input})
+    }
+
     render() {
         return (
-            <table border="1">
-                <thead>
-                {this.genHead()}
-                </thead>
+            <Table tasks={this.state.tasks} inputs={this.state.inputs} onDescriptionAdd={this.onDescriptionAdd.bind(this)}
+                   onStatusAdd={this.onStatusAdd.bind(this)} onAddHandler={this.onAddHandler.bind(this)} onSaveInputHandler={this.onSaveInputHandler.bind(this)}/>
+        );
+    }
+}
+
+function Table(props) {
+    return (
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        Id
+                    </td>
+                    <td>
+                        Description
+                    </td>
+                    <td>
+                        Status
+                    </td>
+                    <td>
+                        Actions
+                    </td>
+                </tr>
                 <tbody>
-                {this.genRow()}
+                <TableRow tasks={props.tasks} inputs={props.inputs} onEditHandler={props.onEditHandler} onSaveHandler={props.onSaveHandler} onDeleteHandler={props.onDeleteHandler}
+                          onDescriptionChange={props.onDescriptionChange} onStatusChange={props.onStatusChange} />
                 </tbody>
             </table>
-        );
-    }
-
-    genHead() {
-        var head = this.props.head;
-
-        return head.map(function(v, i) {
-            return (
-                <th key={'th' + i}>
-                    {v}
-                </th>
-            );
-        });
-    }
-
-    genRow() {
-        var rows = this.props.rows;
-
-        return rows.map(function(v, i) {
-            var tmp = v.map(function(v2, j) {
-                return (
-                    <td key={'td' + i + '_' + j}>
-                        {v2}
-                    </td>
-                );
-            });
-
-            return (
-                <tr key={'tr' + i}>
-                    {tmp}
-                </tr>
-            )
-        });
-    }
-}
-class Status extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {value: 'in progress'};
-
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleChange(event) {
-        this.setState({value: event.target.value});
-    }
-
-    render() {
-        return (
-            <form>
-                <label>
-                    <select value={this.state.value} onChange={this.handleChange}>
-                        <option value="in progress">In progress</option>
-                        <option value="resolved">Resolved</option>
-                        <option value="closed">Closed</option>
-                        <option value="feedback">Feedback</option>
+            {
+                <div className="Inputs">
+                    <input type="text" value={props.description} readOnly={props.inputs.readOnly}
+                           onChange={(e) => props.onDescriptionAdd(e)} placeholder="description"/>
+                    <select value={props.status} disabled={props.inputs.readOnly}
+                            onChange={(e) => props.onStatusAdd(e)}>
+                        <option value="New">New</option>
+                        <option value="In progress">In progress</option>
+                        <option value="Resolved">Resolved</option>
+                        <option value="Closed">Closed</option>
+                        <option value="Feedback">Feedback</option>
                     </select>
-                </label>
-            </form>
-        );
-    }
+                    {props.inputs.readOnly ? <button onClick={() => props.onAddHandler()}>Add</button> :
+                        <button onClick={() => props.onSaveInputHandler()}>Save</button>}
+                </div>
+            }
+        </div>
+    );
+}
+
+function TableRow(props) {
+    return (
+            _.map(props.tasks,
+            function (task) {
+                return <tr>
+                    <td>
+                        {task.id}
+                    </td>
+                    <td>
+                        <input type="text" value={task.description} readOnly={task.readOnly}
+                               onChange={(e) => props.onDescriptionChange(e, task)}/>
+                    </td>
+                    <td>
+                        <select value={task.status} disabled={task.readOnly} onChange={(e) => props.onStatusChange(e, task)}>
+                            <option value="New" selected={task.status === 'New'}>New</option>
+                            <option value="In progress" selected={task.status === 'In progress'}>In progress</option>
+                            <option value="Resolved" selected={task.status === "Resolved"}>Resolved</option>
+                            <option value="Closed" selected={task.status === "Closed"}>Closed</option>
+                            <option value="Feedback" selected={task.status === "Feedback"}>Feedback</option>
+                        </select>
+                    </td>
+                    <td>
+                        {task.readOnly ?
+                            <button onClick={props.onEditHandler}>Edit</button> : <button onClick={props.onSaveHandler}>Save</button>}
+                        <button onClick={props.onDeleteHandler}>Delete</button>
+                    </td>
+                </tr>
+            })
+    );
 }
 
 export default App;

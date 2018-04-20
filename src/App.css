@@ -30,6 +30,7 @@ table {
 .Inputs {
   float: left;
   margin-left: 30px;
+  display: inline;
 }
 .AddBtn {
   float: left;
@@ -38,4 +39,11 @@ table {
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.hidden {
+  visibility: hidden;
+}
+.AddSave {
+
 }

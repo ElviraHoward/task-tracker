@@ -385,7 +385,7 @@ While you can still use `require()` and `module.exports`, we encourage you to us
 
 For example:
 
-### `Button.js`
+### `TaskTable.js`
 
 ```js
 import React, { Component } from 'react';
@@ -492,13 +492,13 @@ This project setup uses [Webpack](https://webpack.js.org/) for handling all asse
 }
 ```
 
-### `Button.js`
+### `TaskTable.js`
 
 ```js
 import React, { Component } from 'react';
-import './Button.css'; // Tell Webpack that Button.js uses these styles
+import './Button.css'; TaskTable.js
 
-class Button extends Component {
+class BTaskTable.jsends Component {
   render() {
     // You can use them as regular CSS styles
     return <div className="Button" />;
