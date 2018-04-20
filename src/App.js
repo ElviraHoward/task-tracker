@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
+import Table from "./Table";
 import _ from 'underscore';
 
 class App extends Component {
@@ -135,85 +136,14 @@ class App extends Component {
 
     render() {
         return (
-            <Table tasks={this.state.tasks} inputs={this.state.inputs} onDescriptionAdd={this.onDescriptionAdd.bind(this)}
-                   onStatusAdd={this.onStatusAdd.bind(this)} onAddHandler={this.onAddHandler.bind(this)} onSaveInputHandler={this.onSaveInputHandler.bind(this)}/>
+            <Table tasks={this.state.tasks} inputs={this.state.inputs} onEditHandler={this.onEditHandler.bind(this)}
+                   onSaveHandler={this.onSaveHandler.bind(this)} onDeleteHandler={this.onDeleteHandler.bind(this)}
+                   onDescriptionChange={this.onDescriptionChange.bind(this)}
+                   onStatusChange={this.onStatusChange.bind(this)} onDescriptionAdd={this.onDescriptionAdd.bind(this)}
+                   onStatusAdd={this.onStatusAdd.bind(this)} onAddHandler={this.onAddHandler.bind(this)}
+                   onSaveInputHandler={this.onSaveInputHandler.bind(this)}/>
         );
     }
-}
-
-function Table(props) {
-    return (
-        <div>
-            <table>
-                <tr>
-                    <td>
-                        Id
-                    </td>
-                    <td>
-                        Description
-                    </td>
-                    <td>
-                        Status
-                    </td>
-                    <td>
-                        Actions
-                    </td>
-                </tr>
-                <tbody>
-                <TableRow tasks={props.tasks} inputs={props.inputs} onEditHandler={props.onEditHandler} onSaveHandler={props.onSaveHandler} onDeleteHandler={props.onDeleteHandler}
-                          onDescriptionChange={props.onDescriptionChange} onStatusChange={props.onStatusChange} />
-                </tbody>
-            </table>
-            {
-                <div className="Inputs">
-                    <input type="text" value={props.description} readOnly={props.inputs.readOnly}
-                           onChange={(e) => props.onDescriptionAdd(e)} placeholder="description"/>
-                    <select value={props.status} disabled={props.inputs.readOnly}
-                            onChange={(e) => props.onStatusAdd(e)}>
-                        <option value="New">New</option>
-                        <option value="In progress">In progress</option>
-                        <option value="Resolved">Resolved</option>
-                        <option value="Closed">Closed</option>
-                        <option value="Feedback">Feedback</option>
-                    </select>
-                    {props.inputs.readOnly ? <button onClick={() => props.onAddHandler()}>Add</button> :
-                        <button onClick={() => props.onSaveInputHandler()}>Save</button>}
-
-                </div>
-            }
-        </div>
-    );
-}
-
-function TableRow(props) {
-    return (
-            _.map(props.tasks,
-            function (task) {
-                return <tr>
-                    <td>
-                        {task.id}
-                    </td>
-                    <td>
-                        <input type="text" value={task.description} readOnly={task.readOnly}
-                               onChange={(e) => props.onDescriptionChange(e, task)}/>
-                    </td>
-                    <td>
-                        <select value={task.status} disabled={task.readOnly} onChange={(e) => props.onStatusChange(e, task)}>
-                            <option value="New" selected={task.status === 'New'}>New</option>
-                            <option value="In progress" selected={task.status === 'In progress'}>In progress</option>
-                            <option value="Resolved" selected={task.status === "Resolved"}>Resolved</option>
-                            <option value="Closed" selected={task.status === "Closed"}>Closed</option>
-                            <option value="Feedback" selected={task.status === "Feedback"}>Feedback</option>
-                        </select>
-                    </td>
-                    <td>
-                        {task.readOnly ?
-                            <button onClick={props.onEditHandler}>Edit</button> : <button onClick={props.onSaveHandler}>Save</button>}
-                        <button onClick={props.onDeleteHandler}>Delete</button>
-                    </td>
-                </tr>
-            })
-    );
 }
 
 export default App;
