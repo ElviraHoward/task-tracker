@@ -178,6 +178,7 @@ function Table(props) {
                     </select>
                     {props.inputs.readOnly ? <button onClick={() => props.onAddHandler()}>Add</button> :
                         <button onClick={() => props.onSaveInputHandler()}>Save</button>}
+
                 </div>
             }
         </div>
