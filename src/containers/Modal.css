@@ -1,0 +1,28 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.5);
+    padding: 250px;
+}
+.modal {
+    background-color: #fff;
+    border-radius: 5px;
+    max-width: 500px;
+    min-height: 100px;
+    margin: 0 auto;
+    padding: 30px;
+}
+.closeBtn {
+    background: #ffffff;
+    color: #000000;
+    display: inline-block;
+    font-size: 20px;
+    font-style: normal;
+    margin-top: 2px;
+}
+.footer {
+    float: right;
+}

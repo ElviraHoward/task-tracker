@@ -20,9 +20,9 @@ function TableRow(props) {
             </select>
         </td>
         <td>
-            {props.task.readOnly ? <button onClick={() => props.onEditHandler(props.task)}>Edit</button> :
-                <button onClick={() => props.onSaveHandler(props.task)}>Save</button>}
-            <button onClick={() => props.onDeleteHandler(props.task)}>Delete</button>
+            {props.task.readOnly ? <button className="EditBtn" onClick={() => props.onEditHandler(props.task)}>Edit</button> :
+                <button className="SaveBtn" onClick={() => props.onSaveHandler(props.task)}>Save</button>}
+            <button className="DeleteBtn" onClick={() => props.onDeleteHandler(props.task)}>Delete</button>
         </td>
     </tr>
 }

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
-import Table from "./Table";
+import Table from "../components/Table";
 import _ from 'underscore';
+import Modal from "./Modal";
 
 class App extends Component {
 
@@ -33,12 +34,19 @@ class App extends Component {
                 id: '',
                 description: '',
                 status: '',
-                readOnly: true
+                readOnly: false
             };
         this.state = {
             tasks: tasks,
-            inputs: inputs
+            inputs: inputs,
+            isOpen: false
         }
+    }
+
+    toggleModal() {
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
     }
 
     onEditHandler(task) {
@@ -115,7 +123,7 @@ class App extends Component {
                 id: '',
                 description: '',
                 status: '',
-                readOnly: true
+                readOnly: false
             }, tasks: tasks
         })
     }
@@ -133,15 +141,34 @@ class App extends Component {
         input.status = e.target.value;
         this.setState({inputs: input})
     }
-
     render() {
-        return (
+        return ( <div>
             <Table tasks={this.state.tasks} inputs={this.state.inputs} onEditHandler={this.onEditHandler.bind(this)}
                    onSaveHandler={this.onSaveHandler.bind(this)} onDeleteHandler={this.onDeleteHandler.bind(this)}
                    onDescriptionChange={this.onDescriptionChange.bind(this)}
                    onStatusChange={this.onStatusChange.bind(this)} onDescriptionAdd={this.onDescriptionAdd.bind(this)}
                    onStatusAdd={this.onStatusAdd.bind(this)} onAddHandler={this.onAddHandler.bind(this)}
                    onSaveInputHandler={this.onSaveInputHandler.bind(this)}/>
+        {
+            <div className="Inputs">
+                <Modal show={this.state.isOpen}
+                       onClose={() => this.toggleModal()}>
+                    <input className="inputType" type="text" value={this.state.inputs.description} readOnly={this.state.inputs.readOnly}
+                           onChange={(e) => this.onDescriptionAdd(e)} placeholder="description"/>
+                    <select className="inputSelect" value={this.state.inputs.status} disabled={this.state.inputs.readOnly}
+                            onChange={(e) => this.onStatusAdd(e)}>
+                        <option value="New">New</option>
+                        <option value="In progress">In progress</option>
+                        <option value="Resolved">Resolved</option>
+                        <option value="Closed">Closed</option>
+                        <option value="Feedback">Feedback</option>
+                    </select>
+                    <button className="SaveInputBtn" onClick={() => this.onSaveInputHandler()}>Save</button>
+                </Modal>
+                <div>  <button className="AddInputBtn" onClick={() => this.toggleModal()}>Add</button> </div>
+            </div>
+        }
+            </div>
         );
     }
 }

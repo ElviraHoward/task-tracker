@@ -1,6 +1,7 @@
 import React from 'react';
 import App from './App';
 import Picture from './Picture';
+import './Main.css';
 
 import { HashRouter, Link } from 'react-router-dom'
 

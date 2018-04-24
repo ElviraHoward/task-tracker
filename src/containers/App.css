@@ -1,0 +1,91 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+table {
+  margin-top: 30px;
+  margin-left: 30px;
+  border: solid 0px black;
+  border-collapse: separate;
+  overflow-x:auto;
+  width: 50%;
+}
+th {
+  background-color: #a79972;
+  color: white;
+}
+tr {
+  text-align: center;
+}
+
+input, select{
+  width: 95%;
+}
+.Inputs {
+  float: left;
+  margin-left: 85px;
+  margin-top: 10px;
+  display: inline-block;
+  width: 50%;
+}
+
+.inputType, .inputSelect {
+  width: 30%;
+  margin-top: 40px;
+  margin-left: 20px;
+}
+
+.SaveInputBtn, .AddInputBtn {
+  margin-left: 5px;
+  background-color: #9d8e62;
+  color: #ffffff;
+}
+
+.SaveInputBtn:hover, .AddInputBtn:hover {
+  margin-left: 5px;
+  background-color: #756d59;
+  color: #ffffff;
+}
+
+.EditBtn, .SaveBtn, .DeleteBtn {
+  margin-left: 5px;
+  background-color: #9d8e62;
+  color: #ffffff;
+  width: 45%;
+}
+
+.EditBtn:hover, .SaveBtn:hover, .DeleteBtn:hover {
+  margin-left: 5px;
+  background-color: #756d59;
+  color: #ffffff;
+  width: 45%;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.hidden {
+  visibility: hidden;
+}
