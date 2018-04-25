@@ -26,8 +26,7 @@ function TableRow(props) {
                   onSaveHandler={props.onSaveHandler} onDeleteHandler={props.onDeleteHandler}/>
         </td>
         <td>
-            <PhoneInput value={props.task.phoneNumber} disabled={props.task.readOnly} onChange={(e) => props.onPhoneNumberChange(e, props.task)} onEditHandler={props.onEditHandler}
-                        onSaveHandler={props.onSaveHandler} onDeleteHandler={props.onDeleteHandler}/>
+            <PhoneInput id={props.task.id} value={props.task.phoneNumber} disabled={props.task.readOnly} onChange={props.onPhoneNumberChange}/>
         </td>
         <td>
             {props.task.readOnly ? <button className="EditBtn" onClick={() => props.onEditHandler(props.task)}>Edit</button> :

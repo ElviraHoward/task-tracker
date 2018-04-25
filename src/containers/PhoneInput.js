@@ -8,23 +8,27 @@ class PhoneInput extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: props.id,
             value: props.value,
-            disabled: props.disabled,
-            onChange: props.onChange,
-            onEditHandler: props.onEditHandler,
-            onSaveHandler: props.onSaveHandler,
-            onDeleteHandler: props.onDeleteHandler
+            disabled: props.disabled
         };
+        this.onChange = props.onChange;
     }
+
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      id: nextProps.id,
+      value: nextProps.value,
+      disabled: nextProps.disabled
+    });
+  }
 
     render() {
         return <Phone
             country="GB"
             value={this.state.value}
             disabled={this.state.disabled}
-            onChange={this.state.onChange}
-            onEditHandler={this.state.onEditHandler}
-            onSaveHandler={this.state.onSaveHandler} onDeleteHandler={this.state.onDeleteHandler}
+            onChange={(newValue) => this.onChange(newValue, this.state.id)}
         />;
 
     }

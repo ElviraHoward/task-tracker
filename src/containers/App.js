@@ -122,12 +122,11 @@ class App extends Component {
         this.setState({tasks: tasks})
     }
 
-    onPhoneNumberChange(e, task) {
-        console.log(e);
+    onPhoneNumberChange(newValue, taskId) {
         let tasks = this.state.tasks;
         tasks = _.map(tasks, function (t) {
-            if (t.id === task.id) {
-                t.phoneNumber = e.target.value;
+            if (t.id === taskId) {
+                t.phoneNumber = newValue;
             }
             return t;
         });
