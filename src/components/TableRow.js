@@ -1,4 +1,6 @@
 import React from 'react';
+import Date from "../containers/Date";
+import PhoneInput from "../containers/PhoneInput";
 
 function TableRow(props) {
     return <tr>
@@ -18,6 +20,14 @@ function TableRow(props) {
                 <option value="Closed" selected={props.task.status === "Closed"}>Closed</option>
                 <option value="Feedback" selected={props.task.status === "Feedback"}>Feedback</option>
             </select>
+        </td>
+        <td>
+            <Date value={props.task.date} disabled={props.task.readOnly} onChange={(e) => props.onDateChange(e, props.task)} onEditHandler={props.onEditHandler}
+                  onSaveHandler={props.onSaveHandler} onDeleteHandler={props.onDeleteHandler}/>
+        </td>
+        <td>
+            <PhoneInput value={props.task.phoneNumber} disabled={props.task.readOnly} onChange={(e) => props.onPhoneNumberChange(e, props.task)} onEditHandler={props.onEditHandler}
+                        onSaveHandler={props.onSaveHandler} onDeleteHandler={props.onDeleteHandler}/>
         </td>
         <td>
             {props.task.readOnly ? <button className="EditBtn" onClick={() => props.onEditHandler(props.task)}>Edit</button> :

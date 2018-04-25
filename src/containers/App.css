@@ -46,13 +46,11 @@ input, select{
   margin-left: 85px;
   margin-top: 10px;
   display: inline-block;
-  width: 50%;
 }
 
-.inputType, .inputSelect {
+.inputDesc, .inputSelect{
   width: 30%;
-  margin-top: 40px;
-  margin-left: 20px;
+  margin-top: 10px;
 }
 
 .SaveInputBtn, .AddInputBtn {

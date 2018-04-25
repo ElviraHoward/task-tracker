@@ -17,6 +17,12 @@ function Table(props) {
                         Status
                     </th>
                     <th>
+                        Date
+                    </th>
+                    <th>
+                        Phone number
+                    </th>
+                    <th>
                         Actions
                     </th>
                 </tr>
@@ -26,7 +32,9 @@ function Table(props) {
                         return <TableRow task={task} onEditHandler={props.onEditHandler}
                                          onSaveHandler={props.onSaveHandler} onDeleteHandler={props.onDeleteHandler}
                                          onDescriptionChange={props.onDescriptionChange}
-                                         onStatusChange={props.onStatusChange}/>
+                                         onStatusChange={props.onStatusChange}
+                                         onPhoneNumberChange={props.onPhoneNumberChange}
+                                         onDateChange={props.onDateChange}/>
                     })
                 }
                 </tbody>
