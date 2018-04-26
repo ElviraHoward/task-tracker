@@ -133,12 +133,11 @@ class App extends Component {
         this.setState({tasks: tasks})
     }
 
-    onDateChange(e, task) {
-        console.log(e);
+    onDateChange(newValue, taskId) {
         let tasks = this.state.tasks;
         tasks = _.map(tasks, function (t) {
-            if (t.id === task.id) {
-                t.date = e.target.value;
+            if (t.id === taskId) {
+                t.date = newValue;
             }
             return t;
         });
@@ -163,6 +162,7 @@ class App extends Component {
                 description: '',
                 status: '',
                 date: '',
+                phoneNumber: '',
                 readOnly: false
             }, tasks: tasks
         })
@@ -182,17 +182,15 @@ class App extends Component {
         this.setState({inputs: input})
     }
 
-    onDateAdd(e) {
-        console.log(e);
+    onDateAdd(newValue) {
         let input = this.state.inputs;
-        input.date = e.target.value;
+        input.date = newValue;
         this.setState({inputs: input})
     }
 
-    onPhoneNumberAdd(e) {
-        console.log(e);
+    onPhoneNumberAdd(newValue) {
         let input = this.state.inputs;
-        input.phoneNumber = e.target.value;
+        input.phoneNumber = newValue;
         this.setState({inputs: input})
     }
 
@@ -206,12 +204,12 @@ class App extends Component {
                    onStatusAdd={this.onStatusAdd.bind(this)} onPhoneNumberAdd={this.onPhoneNumberAdd.bind(this)} onDateAdd={this.onDateAdd.bind(this)}
                    onAddHandler={this.onAddHandler.bind(this)} onSaveInputHandler={this.onSaveInputHandler.bind(this)}/>
         {
-            <div className="Inputs">
+            <div className="input-values">
                 <Modal show={this.state.isOpen}
                        onClose={() => this.toggleModal()}>
-                    <input className="inputDesc" type="text" value={this.state.inputs.description} readOnly={this.state.inputs.readOnly}
+                    <input className="input-desc" type="text" value={this.state.inputs.description} readOnly={this.state.inputs.readOnly}
                            onChange={(e) => this.onDescriptionAdd(e)} placeholder="description"/>
-                    <select className="inputSelect" value={this.state.inputs.status} disabled={this.state.inputs.readOnly}
+                    <select className="input-select" value={this.state.inputs.status} disabled={this.state.inputs.readOnly}
                             onChange={(e) => this.onStatusAdd(e)}>
                         <option value="New">New</option>
                         <option value="In progress">In progress</option>
@@ -219,13 +217,13 @@ class App extends Component {
                         <option value="Closed">Closed</option>
                         <option value="Feedback">Feedback</option>
                     </select>
-                    <Date className="inputDate" value={this.state.inputs.date} disabled={this.state.inputs.readOnly}
+                    <Date className="input-date" value={this.state.inputs.date} disabled={this.state.inputs.readOnly}
                           onChange={(e) => this.onDateAdd(e)}  placeholder="date" />
-                    <PhoneNumber className="inputPhone" value={this.state.inputs.phoneNumber} disabled={this.state.inputs.readOnly}
+                    <PhoneNumber className="input-phone" value={this.state.inputs.phoneNumber} disabled={this.state.inputs.readOnly}
                                  onChange={(e) => this.onPhoneNumberAdd(e)}  placeholder="phone" />
-                    <button className="SaveInputBtn" onClick={() => this.onSaveInputHandler()}>Save</button>
+                    <button className="save-input-btn" onClick={() => this.onSaveInputHandler()}>Save</button>
                 </Modal>
-                <div>  <button className="AddInputBtn" onClick={() => this.toggleModal()}>Add</button> </div>
+                <div>  <button className="add-input-btn" onClick={() => this.toggleModal()}>Add</button> </div>
             </div>
         }
             </div>

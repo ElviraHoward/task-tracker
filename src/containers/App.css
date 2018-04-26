@@ -41,38 +41,38 @@ tr {
 input, select{
   width: 95%;
 }
-.Inputs {
+.input-values {
   float: left;
   margin-left: 85px;
   margin-top: 10px;
   display: inline-block;
 }
 
-.inputDesc, .inputSelect{
+.input-desc, .input-select{
   width: 30%;
   margin-top: 10px;
 }
 
-.SaveInputBtn, .AddInputBtn {
+.save-input-btn, .add-input-btn {
   margin-left: 5px;
   background-color: #9d8e62;
   color: #ffffff;
 }
 
-.SaveInputBtn:hover, .AddInputBtn:hover {
+.save-input-btn:hover, .add-input-btn:hover {
   margin-left: 5px;
   background-color: #756d59;
   color: #ffffff;
 }
 
-.EditBtn, .SaveBtn, .DeleteBtn {
+.edit-btn, .save-btn, .delete-btn {
   margin-left: 5px;
   background-color: #9d8e62;
   color: #ffffff;
   width: 45%;
 }
 
-.EditBtn:hover, .SaveBtn:hover, .DeleteBtn:hover {
+.edit-btn:hover, .save-btn:hover, .delete-btn:hover {
   margin-left: 5px;
   background-color: #756d59;
   color: #ffffff;

@@ -15,13 +15,12 @@
     margin: 0 auto;
     padding: 30px;
 }
-.closeBtn {
+.close-btn {
     background: #ffffff;
     color: #000000;
     display: inline-block;
     font-size: 20px;
     font-style: normal;
-    margin-top: 2px;
 }
 .footer {
     float: right;

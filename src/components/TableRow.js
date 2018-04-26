@@ -22,16 +22,15 @@ function TableRow(props) {
             </select>
         </td>
         <td>
-            <Date value={props.task.date} disabled={props.task.readOnly} onChange={(e) => props.onDateChange(e, props.task)} onEditHandler={props.onEditHandler}
-                  onSaveHandler={props.onSaveHandler} onDeleteHandler={props.onDeleteHandler}/>
+            <Date id={props.task.id} value={props.task.date} disabled={props.task.readOnly} onChange={props.onDateChange} />
         </td>
         <td>
             <PhoneInput id={props.task.id} value={props.task.phoneNumber} disabled={props.task.readOnly} onChange={props.onPhoneNumberChange}/>
         </td>
         <td>
-            {props.task.readOnly ? <button className="EditBtn" onClick={() => props.onEditHandler(props.task)}>Edit</button> :
-                <button className="SaveBtn" onClick={() => props.onSaveHandler(props.task)}>Save</button>}
-            <button className="DeleteBtn" onClick={() => props.onDeleteHandler(props.task)}>Delete</button>
+            {props.task.readOnly ? <button className="edit-btn" onClick={() => props.onEditHandler(props.task)}>Edit</button> :
+                <button className="save-btn" onClick={() => props.onSaveHandler(props.task)}>Save</button>}
+            <button className="delete-btn" onClick={() => props.onDeleteHandler(props.task)}>Delete</button>
         </td>
     </tr>
 }

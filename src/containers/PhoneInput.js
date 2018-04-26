@@ -15,21 +15,19 @@ class PhoneInput extends Component {
         this.onChange = props.onChange;
     }
 
-  componentWillReceiveProps(nextProps){
-    this.setState({
-      id: nextProps.id,
-      value: nextProps.value,
-      disabled: nextProps.disabled
-    });
-  }
-
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            id: nextProps.id,
+            value: nextProps.value,
+            disabled: nextProps.disabled
+        });
+    }
     render() {
         return <Phone
             country="GB"
             value={this.state.value}
             disabled={this.state.disabled}
-            onChange={(newValue) => this.onChange(newValue, this.state.id)}
-        />;
+            onChange={(newValue) => this.onChange(newValue, this.state.id)}/>;
 
     }
 }
